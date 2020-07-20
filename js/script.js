@@ -207,7 +207,58 @@ let more = document.querySelector('.more'),
     showSlides(sliderIndex);
 });
 
-
-
+// let valueOpt = document.querySelectorAll('option').getAttribute('value');
+// console.log(valueOpt);
 //form
 
+function calc() {
+    let amountPeople = document.querySelectorAll('.counter-block-input')[0],
+        amountDays = document.querySelectorAll('.counter-block-input')[1],
+        totalSum = document.getElementById('total'),
+        people = 0 ,
+        days = 0 ,
+        total = 0 ;
+
+    totalSum.innerHTML = 0;
+
+
+    amountPeople.addEventListener('input' , function() {
+        people = +this.value;
+        total = (people + days) * 120 ;
+        if(amountDays.value == ''){
+            totalSum.innerHTML = 0;
+            days = 0;
+            people = 0;
+        } else {
+            totalSum.innerHTML = total;
+        }
+    });
+
+    amountDays.addEventListener('input' , function() {
+        days = +this.value;
+        total = (people + days) * 120 ;
+        if(amountPeople.value == ''){
+            totalSum.innerHTML = 0;
+            people = 0;
+            days = 0;
+        }  else {
+            totalSum.innerHTML = total;
+        }
+    });
+
+    let place = document.getElementById('select')
+
+    place.addEventListener('change' , function() {
+        if(amountPeople.value == '' || amountDays.value == ''){
+            totalSum.innerHTML = 0;
+            people = 0;
+            days = 0;
+        } else {
+            let a = total;
+            totalSum.innerHTML = a * this.options[this.selectedIndex].value;
+        }
+
+    });
+}
+
+calc();
